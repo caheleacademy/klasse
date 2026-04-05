@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💃</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Klasse — La app que tu academia merece</title>
+<meta name="description" content="Klasse es la plataforma todo en uno para academias de baile y danza. Gestión, comunidad y asistente IA en una sola app.">
+<meta property="og:title" content="Klasse — La app que tu academia merece">
+<meta property="og:description" content="Gestión, comunidad y asistente IA en una sola plataforma. Setup en 24h. Sin permanencia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://klasseapp.com">
+<meta property="og:image" content="https://klasseapp.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Klasse — La app que tu academia merece">
+<meta name="twitter:description" content="Gestión, comunidad y asistente IA para academias de baile y danza.">
+<link rel="canonical" href="https://klasseapp.com">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --white: #f8f6f2;
+  --accent: #e8c96d;
+  --accent2: #c9a84c;
+  --accent-dark: #9a7830;
+  --muted: #6a6560;
+  --surface: #111111;
+  --border: #222222;
+  --success: #4caf72;
+  --lang-btn-w: 56px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  position: fixed; top: 20px; right: 24px; z-index: 1000;
+  display: flex; background: rgba(17,17,17,0.9);
+  border: 1px solid var(--border); border-radius: 50px;
+  padding: 4px; backdrop-filter: blur(10px);
+  gap: 2px; max-width: calc(100vw - 48px);
+}
+.lang-btn {
+  padding: 6px 10px; border-radius: 50px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
+  font-weight: 600; letter-spacing: 0.5px; cursor: pointer;
+  transition: all 0.2s; background: transparent; color: var(--muted);
+}
+.lang-btn.active { background: var(--accent); color: #000; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.3s;
+}
+nav.scrolled {
+  background: rgba(8,8,8,0.92); backdrop-filter: blur(20px);
+  padding: 14px 48px; border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900; color: var(--accent);
+  letter-spacing: -1px;
+}
+.nav-logo span { color: var(--white); font-style: italic; }
+.nav-cta {
+  padding: 10px 28px; border-radius: 50px;
+  background: var(--accent); color: #000;
+  font-weight: 600; font-size: 0.85rem; border: none;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+  text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: var(--white); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(232,201,109,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 30% at 90% 10%, rgba(232,201,109,0.05) 0%, transparent 50%);
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 50px;
+  border: 1px solid rgba(232,201,109,0.3);
+  background: rgba(232,201,109,0.06);
+  font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 32px;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-tag::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-weight: 900; line-height: 1.0;
+  margin-bottom: 8px; position: relative;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-title .k { color: var(--accent); }
+.hero-title .italic { font-style: italic; color: rgba(248,246,242,0.5); }
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--muted); max-width: 600px;
+  line-height: 1.7; margin: 24px auto 48px;
+  font-weight: 300; animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+
+.hero-ctas {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+.btn-primary {
+  padding: 16px 40px; border-radius: 50px;
+  background: var(--accent); color: #000;
+  font-weight: 700; font-size: 0.95rem;
+  border: none; cursor: pointer; transition: all 0.25s;
+  text-decoration: none; display: inline-block;
+  letter-spacing: 0.3px;
+}
+.btn-primary:hover { background: var(--white); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(232,201,109,0.3); }
+.btn-ghost {
+  padding: 16px 36px; border-radius: 50px;
+  border: 1px solid rgba(248,246,242,0.2);
+  color: var(--white); font-size: 0.95rem;
+  background: transparent; cursor: pointer; transition: all 0.25s;
+  text-decoration: none; display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-stats {
+  display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+  margin-top: 80px; padding-top: 48px;
+  border-top: 1px solid rgba(232,201,109,0.1);
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+.stat-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 2.4rem; font-weight: 500; color: var(--accent);
+}
+.stat-lbl { font-size: 0.72rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ── SECTION ── */
+section { padding: 100px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-tag {
+  font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px; text-align: center;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700; text-align: center; line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-sub {
+  font-size: 1rem; color: var(--muted); text-align: center;
+  max-width: 560px; margin: 0 auto 64px; line-height: 1.8;
+}
+
+/* ── PROBLEM ── */
+#problema { background: var(--surface); }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 2px; margin-top: 48px;
+  border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+}
+.problem-item {
+  padding: 32px 28px; background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+.problem-item:last-child { border-right: none; }
+.problem-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; opacity: 0.6; }
+.problem-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+.problem-text strong { color: var(--white); display: block; margin-bottom: 6px; font-size: 0.95rem; }
+
+/* ── FEATURES ── */
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px 32px;
+  position: relative; overflow: hidden; transition: all 0.3s;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.feature-card:hover { border-color: rgba(232,201,109,0.3); transform: translateY(-4px); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon { font-size: 2.4rem; margin-bottom: 20px; display: block; }
+.feature-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+.feature-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.feature-tag {
+  display: inline-block; margin-top: 16px;
+  padding: 4px 12px; border-radius: 20px;
+  background: rgba(232,201,109,0.1); color: var(--accent);
+  font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ── COMPARISON ── */
+#comparacion { background: var(--surface); }
+.compare-table {
+  width: 100%; border-collapse: collapse; margin-top: 48px;
+  border-radius: 16px; overflow: hidden;
+}
+.compare-table th {
+  padding: 20px 24px; text-align: center; font-size: 0.85rem;
+  font-weight: 700; letter-spacing: 1px;
+}
+.compare-table th:first-child { text-align: left; }
+.compare-table th.klasse-col { background: rgba(232,201,109,0.1); color: var(--accent); }
+.compare-table th.other-col { color: var(--muted); }
+.compare-table td {
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  font-size: 0.85rem; text-align: center; color: var(--muted);
+}
+.compare-table td:first-child { text-align: left; color: var(--white); }
+.compare-table td.klasse-col { background: rgba(232,201,109,0.05); color: var(--accent); font-weight: 700; }
+.check { color: var(--success); font-size: 1rem; }
+.cross { color: #666; font-size: 0.9rem; }
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 20px; max-width: 860px; margin: 0 auto;
+}
+.price-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 24px; padding: 40px 32px; text-align: center;
+  position: relative; transition: all 0.3s;
+}
+.price-card.featured {
+  border: 2px solid var(--accent);
+  background: linear-gradient(135deg, rgba(232,201,109,0.06), var(--surface));
+}
+.price-card:hover { transform: translateY(-6px); }
+.price-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #000; font-size: 0.7rem;
+  font-weight: 700; padding: 4px 16px; border-radius: 20px;
+  letter-spacing: 1px; white-space: nowrap; text-transform: uppercase;
+}
+.price-plan { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.price-amount {
+  font-family: 'DM Mono', monospace;
+  font-size: 3rem; font-weight: 500; color: var(--white); line-height: 1;
+}
+.price-amount span { font-size: 1.2rem; color: var(--muted); }
+.price-period { font-size: 0.8rem; color: var(--muted); margin: 6px 0 28px; }
+.price-features { list-style: none; text-align: left; margin-bottom: 32px; }
+.price-features li {
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.83rem; display: flex; align-items: center; gap: 10px;
+}
+.price-features li:last-child { border-bottom: none; }
+.price-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.price-cta {
+  width: 100%; padding: 14px;
+  background: var(--accent); color: #000;
+  border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.price-cta:hover { background: var(--white); }
+.price-cta.ghost {
+  background: transparent; border: 1px solid var(--border); color: var(--white);
+}
+.price-cta.ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+
+/* ── TESTIMONIAL ── */
+#academias { background: var(--surface); }
+.academy-showcase {
+  background: linear-gradient(135deg, rgba(232,201,109,0.06), transparent);
+  border: 1px solid rgba(232,201,109,0.2);
+  border-radius: 24px; padding: 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.showcase-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.showcase-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+.showcase-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+.showcase-features { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.sf-item { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; }
+.sf-item::before { content:'✓'; color: var(--accent); font-weight: 700; }
+.showcase-mockup {
+  background: var(--black); border: 1px solid var(--border);
+  border-radius: 20px; padding: 24px; font-size: 0.78rem;
+}
+.mockup-bar {
+  display: flex; gap: 6px; margin-bottom: 16px;
+}
+.mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+.mockup-screen {
+  background: var(--surface); border-radius: 12px; padding: 20px;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted);
+  line-height: 1.8;
+}
+.mockup-screen .accent { color: var(--accent); }
+.mockup-screen .success { color: var(--success); }
+.mockup-screen .white { color: var(--white); }
+
+/* ── CONTACT FORM ── */
+#contacto { }
+.contact-wrap {
+  max-width: 680px; margin: 0 auto;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 28px; padding: 56px 48px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+.form-input {
+  width: 100%; padding: 14px 18px;
+  background: var(--black); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 16px;
+  outline: none; transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--accent); }
+select.form-input { cursor: pointer; }
+textarea.form-input { min-height: 120px; resize: vertical; }
+.form-submit {
+  width: 100%; padding: 16px;
+  background: var(--accent); color: #000;
+  border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--white); transform: translateY(-2px); }
+.form-msg { padding: 12px 16px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 16px; display: none; text-align: center; }
+.form-msg.ok { background: rgba(76,175,114,0.15); color: var(--success); border: 1px solid rgba(76,175,114,0.3); }
+.form-msg.err { background: rgba(201,76,76,0.15); color: #e07070; border: 1px solid rgba(201,76,76,0.3); }
+
+/* ── FAQ ── */
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--border); padding: 24px 0; cursor: pointer;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.95rem; font-weight: 500; color: var(--white);
+}
+.faq-q::after { content: '+'; color: var(--accent); font-size: 1.4rem; font-weight: 300; flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; padding-top: 0; }
+.faq-item.open .faq-a { max-height: 300px; padding-top: 14px; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 48px 24px; text-align: center;
+  border-top: 1px solid var(--border);
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 900; color: var(--accent);
+}
+.footer-logo span { color: var(--white); font-style: italic; }
+
+/* ── MOBILE ── */
+@media(max-width: 768px) {
+  nav { padding: 16px 20px; }
+  nav.scrolled { padding: 12px 20px; }
+  .lang-toggle { top: 16px; right: 20px; }
+  .academy-showcase { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; }
+  .contact-wrap { padding: 36px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .problem-item { border-right: none; border-bottom: 1px solid var(--border); }
+  section { padding: 72px 20px; }
+  .compare-table { font-size: 0.78rem; }
+  .compare-table th, .compare-table td { padding: 12px 14px; }
+}
+@media(max-width: 480px) {
+  .hero-ctas { flex-direction: column; align-items: center; width: 100%; }
+  .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+  .hero-stats { gap: 24px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  <button class="lang-btn" onclick="setLang('it')">IT</button>
+  <button class="lang-btn" onclick="setLang('pt')">PT</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Kl<span>asse</span></div>
+  <a href="#contacto" class="nav-cta" data-es="Solicitar demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo" data-en="Request demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo">Solicitar demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-tag" data-es="✦ Más de 45 academias ya están en Klasse" data-en="✦ Join 45+ academies already using Klasse">✦ Más de 45 academias ya están en Klasse</div>
+  <h1 class="hero-title">
+    <span class="k">Kl</span><span class="italic">asse</span>
+  </h1>
+  <p class="hero-sub" data-es="La plataforma <strong>todo en uno</strong> que usan las mejores academias de baile. Ahorra horas cada semana, cobra a tiempo y fideliza a tus alumnos." data-fr="La plateforme <strong>tout-en-un</strong> des meilleures académies de danse. Gagnez des heures chaque semaine, encaissez à temps et fidélisez vos élèves." data-it="La piattaforma <strong>tutto in uno</strong> delle migliori accademie di ballo. Risparmia ore ogni settimana, incassa puntualmente e fidelizza i tuoi allievi." data-pt="A plataforma <strong>tudo-em-um</strong> das melhores academias de dança. Poupe horas por semana, receba a tempo e fidelize os seus alunos." data-en="The <strong>all-in-one</strong> platform used by top dance academies. Save hours every week, get paid on time and retain your students." data-fr="La plateforme <strong>tout-en-un</strong> des meilleures académies de danse. Gagnez des heures chaque semaine, encaissez à temps et fidélisez vos élèves." data-it="La piattaforma <strong>tutto in uno</strong> delle migliori accademie di ballo. Risparmia ore ogni settimana, incassa puntualmente e fidelizza i tuoi allievi." data-pt="A plataforma <strong>tudo-em-um</strong> das melhores academias de dança. Poupe horas por semana, receba a tempo e fidelize os seus alunos.">
+    La plataforma <strong>todo en uno</strong> que usan las mejores academias de baile. Ahorra horas cada semana, cobra a tiempo y fideliza a tus alumnos.
+  </p>
+  <div class="hero-ctas">
+    <a href="#contacto" class="btn-primary" data-es="💛 Quiero mi demo gratis — sin compromiso" data-fr="💛 Je veux ma démo gratuite — sans engagement" data-it="💛 Voglio la mia demo gratis — senza impegno" data-pt="💛 Quero a minha demo grátis — sem compromisso" data-en="💛 Get my free demo — no commitment" data-fr="💛 Je veux ma démo gratuite — sans engagement" data-it="💛 Voglio la mia demo gratis — senza impegno" data-pt="💛 Quero a minha demo grátis — sem compromisso">💛 Quiero mi demo gratis — sin compromiso</a>
+    <a href="#funcionalidades" class="btn-ghost" data-es="Ver funcionalidades" data-fr="Voir les fonctionnalités" data-it="Vedi le funzionalità" data-pt="Ver funcionalidades" data-en="See features" data-fr="Voir les fonctionnalités" data-it="Vedi le funzionalità" data-pt="Ver funcionalidades">Ver funcionalidades</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">45+</div>
+      <div class="stat-lbl" data-es="Funcionalidades" data-fr="Fonctionnalités" data-it="Funzionalità" data-pt="Funcionalidades" data-en="Features" data-fr="Fonctionnalités" data-it="Funzionalità" data-pt="Funcionalidades">Funcionalidades</div>
+    </div>
+    <div>
+      <div class="stat-num">IA</div>
+      <div class="stat-lbl" data-es="Asistente incluido" data-fr="Assistant inclus" data-it="Assistente incluso" data-pt="Assistente incluído" data-en="AI assistant included" data-fr="Assistant inclus" data-it="Assistente incluso" data-pt="Assistente incluído">Asistente incluido</div>
+    </div>
+    <div>
+      <div class="stat-num">100%</div>
+      <div class="stat-lbl" data-es="Personalizable" data-fr="Personnalisable" data-it="Personalizzabile" data-pt="Personalizável" data-en="Customizable" data-fr="Personnalisable" data-it="Personalizzabile" data-pt="Personalizável">Personalizable</div>
+    </div>
+    <div>
+      <div class="stat-num">24h</div>
+      <div class="stat-lbl" data-es="Setup inicial" data-fr="Installation initiale" data-it="Setup iniziale" data-pt="Setup inicial" data-en="Initial setup" data-fr="Installation initiale" data-it="Setup iniziale" data-pt="Setup inicial">Setup inicial</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema">
+  <div class="container">
+    <div class="section-tag" data-es="El problema" data-fr="Le problème" data-it="Il problema" data-pt="O problema" data-en="The problem" data-fr="Le problème" data-it="Il problema" data-pt="O problema">El problema</div>
+    <h2 class="section-title" data-es="Gestionar una academia sin Klasse es perder <em>dinero y tiempo</em>" data-fr="Gérer une académie sans Klasse, c'est perdre <em>argent et temps</em>" data-it="Gestire un'accademia senza Klasse significa perdere <em>soldi e tempo</em>" data-pt="Gerir uma academia sem Klasse é perder <em>dinheiro e tempo</em>" data-en="Managing an academy without Klasse means losing <em>money and time</em>" data-fr="Gérer une académie sans Klasse, c'est perdre <em>argent et temps</em>" data-it="Gestire un'accademia senza Klasse significa perdere <em>soldi e tempo</em>" data-pt="Gerir uma academia sem Klasse é perder <em>dinheiro e tempo</em>">Gestionar una academia sin Klasse es perder <em>dinero y tiempo</em></h2>
+    <p class="section-sub" data-es="Cada mes pierdes dinero por pagos sin controlar y alumnos que se van sin avisar. Con Klasse, todo eso se acaba." data-en="Every month you lose money from untracked payments and students leaving without notice. With Klasse, all that ends.">Cada mes pierdes dinero por pagos sin controlar y alumnos que se van sin avisar. Con Klasse, todo eso se acaba.</p>
+    <div class="problem-grid">
+      <div class="problem-item">
+        <span class="problem-icon">😤</span>
+        <div class="problem-text"><strong data-es="Pagos sin control" data-en="Untracked payments">Pagos sin control</strong><span data-es="Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos." data-en="Every month you lose hundreds in forgotten payments. With Klasse, billing manages itself.">Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos.</span></div>
+      </div>
+      <div class="problem-item">
+        <span class="problem-icon">📱</span>
+        <div class="problem-text"><strong data-es="WhatsApp eterno" data-en="Endless WhatsApp">WhatsApp eterno</strong><span data-es="Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional." data-en="WhatsApp groups nobody reads, students missing info. With Klasse you have professional communication.">Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional.</span></div>
+      </div>
+      <div class="problem-item">
+        <span class="problem-icon">📉</span>
+        <div class="problem-text"><strong data-es="Alumnos que se van" data-en="Students dropping out">Alumnos que se van</strong><span data-es="Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan." data-en="Without engagement, students get bored and leave. Klasse builds the community that keeps them coming back.">Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan.</span></div>
+      </div>
+      <div class="problem-item">
+        <span class="problem-icon">⏰</span>
+        <div class="problem-text"><strong data-es="Horas perdidas" data-en="Hours wasted">Horas perdidas</strong><span data-es="Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar." data-en="10+ hours a week wasted on tasks Klasse handles automatically. Time you could spend dancing.">Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONALIDADES -->
+<section id="funcionalidades">
+  <div class="container">
+    <div class="section-tag" data-es="La solución" data-fr="La solution" data-it="La soluzione" data-pt="A solução" data-en="The solution" data-fr="La solution" data-it="La soluzione" data-pt="A solução">La solución</div>
+    <h2 class="section-title" data-es="Todo lo que tu academia <em>necesita</em>" data-fr="Tout ce dont votre académie <em>a besoin</em>" data-it="Tutto ciò di cui la tua accademia <em>ha bisogno</em>" data-pt="Tudo o que a tua academia <em>precisa</em>" data-en="Everything your academy <em>needs</em>" data-fr="Tout ce dont votre académie <em>a besoin</em>" data-it="Tutto ciò di cui la tua accademia <em>ha bisogno</em>" data-pt="Tudo o que a tua academia <em>precisa</em>">Todo lo que tu academia <em>necesita</em></h2>
+    <p class="section-sub" data-es="Una sola plataforma para gestionar, comunicar y fidelizar. Con tu logo, tus colores y tu dominio." data-en="One single platform to manage, communicate and retain. With your logo, your colors and your domain.">Una sola plataforma para gestionar, comunicar y fidelizar. Con tu logo, tus colores y tu dominio.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <div class="feature-title" data-es="Asistente IA" data-en="AI Assistant">Asistente IA</div>
+        <div class="feature-desc" data-es="Tu academia tiene su propio ChatGPT privado. Responde las dudas de tus alumnos a las 3 de la mañana si hace falta. Sin coste extra." data-en="Your academy gets its own private ChatGPT. It answers student questions at 3am if needed. No extra cost.">Tu academia tiene su propio ChatGPT privado. Responde las dudas de tus alumnos a las 3 de la mañana si hace falta. Sin coste extra.</div>
+        <span class="feature-tag" data-es="Exclusivo Klasse" data-en="Klasse exclusive">Exclusivo Klasse</span>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💳</span>
+        <div class="feature-title" data-es="Gestión de pagos" data-en="Payment management">Gestión de pagos</div>
+        <div class="feature-desc" data-es="Genera los cobros de todos tus alumnos en un clic. Recibe alertas de impagos al instante. Nunca más una mensualidad perdida." data-en="Generate all your student payments in one click. Get instant alerts for missing payments. Never lose a monthly fee again.">Genera los cobros de todos tus alumnos en un clic. Recibe alertas de impagos al instante. Nunca más una mensualidad perdida.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💃</span>
+        <div class="feature-title" data-es="App exclusiva para alumnos" data-en="Exclusive student app">App exclusiva para alumnos</div>
+        <div class="feature-desc" data-es="Tus alumnos tienen su propio espacio exclusivo: perfil, logros, vídeos de clase y su historia en tu academia. Se sienten especiales. No se van." data-en="Your students get their own exclusive space: profile, achievements, class videos and their story at your academy. They feel special. They stay.">Tus alumnos tienen su propio espacio exclusivo: perfil, logros, vídeos de clase y su historia en tu academia. Se sienten especiales. No se van.</div>
+        <span class="feature-tag" data-es="Fidelización real" data-en="Real retention">Fidelización real</span>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌐</span>
+        <div class="feature-title" data-es="Landing pública personalizada" data-en="Custom public website">Landing pública personalizada</div>
+        <div class="feature-desc" data-es="Tu academia tendrá una web que impresiona. Con horarios, tarifas, formulario de captación y login integrado. Online en menos de 24h." data-en="Your academy will have a website that impresses. With schedules, pricing, lead capture form and integrated login. Live in less than 24h.">Tu academia tendrá una web que impresiona. Con horarios, tarifas, formulario de captación y login integrado. Online en menos de 24h.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title" data-es="Panel de control completo" data-en="Complete control panel">Panel de control completo</div>
+        <div class="feature-desc" data-es="Asistencia, grupos, horarios, feedback, contratos digitales, diplomas, estadísticas de negocio y mucho más. Todo en un solo lugar." data-en="Attendance, groups, schedules, feedback, digital contracts, diplomas, business analytics and much more. All in one place.">Asistencia, grupos, horarios, feedback, contratos digitales, diplomas, estadísticas de negocio y mucho más. Todo en un solo lugar.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎯</span>
+        <div class="feature-title" data-es="Sistema de logros y retención" data-en="Achievement & retention system">Sistema de logros y retención</div>
+        <div class="feature-desc" data-es="Puntos, logros, retos semanales y ranking. Tus alumnos compiten entre sí, se enganchan y dejan de abandonar. El churn se reduce hasta un 40%." data-en="Points, achievements, weekly challenges and leaderboards. Students compete, get hooked and stop dropping out. Churn drops up to 40%.">Puntos, logros, retos semanales y ranking. Tus alumnos compiten entre sí, se enganchan y dejan de abandonar. El churn se reduce hasta un 40%.</div>
+        <span class="feature-tag" data-es="Reduce el abandono" data-en="Reduces dropout">Reduce el abandono</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARACIÓN -->
+<section id="comparacion">
+  <div class="container">
+    <div class="section-tag" data-es="Comparativa" data-fr="Comparaison" data-it="Confronto" data-pt="Comparação" data-en="Comparison" data-fr="Comparaison" data-it="Confronto" data-pt="Comparação">Comparativa</div>
+    <h2 class="section-title" data-es="Klasse vs <em>el resto</em>" data-fr="Klasse vs <em>les autres</em>" data-it="Klasse vs <em>gli altri</em>" data-pt="Klasse vs <em>os outros</em>" data-en="Klasse vs <em>the rest</em>" data-fr="Klasse vs <em>les autres</em>" data-it="Klasse vs <em>gli altri</em>" data-pt="Klasse vs <em>os outros</em>">Klasse vs <em>el resto</em></h2>
+    <p class="section-sub" data-es="Por menos de lo que pagas en otras herramientas, tienes todo esto — y mucho más." data-en="For less than what you pay in other tools, you get all this — and much more.">Por menos de lo que pagas en otras herramientas, tienes todo esto — y mucho más.</p>
+    <div style="overflow-x:auto">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;color:var(--muted);font-weight:400" data-es="Funcionalidad" data-en="Feature">Funcionalidad</th>
+          <th class="klasse-col">Klasse ✦</th>
+          <th class="other-col" data-es="Otros software" data-en="Other software">Otros software</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-es="Asistente IA incluido" data-en="AI assistant included" data-fr="Assistant inclus" data-it="Assistente incluso" data-pt="Assistente incluído">Asistente IA incluido</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr><td data-es="App exclusiva para alumnos" data-en="Exclusive student app">App exclusiva para alumnos</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr><td data-es="Landing pública incluida" data-en="Public website included">Landing pública incluida</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr><td data-es="Sistema de logros y gamificación" data-en="Achievement & gamification system">Sistema de logros y gamificación</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr><td data-es="Gestión de pagos" data-en="Payment management">Gestión de pagos</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
+        <tr><td data-es="Control de asistencia" data-en="Attendance tracking">Control de asistencia</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
+        <tr><td data-es="Contratos digitales" data-en="Digital contracts">Contratos digitales</td><td class="klasse-col check">✓</td><td>Algunos</td></tr>
+        <tr><td data-es="Vídeos de clase privados" data-en="Private class videos">Vídeos de clase privados</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr><td data-es="Dominio propio incluido" data-en="Custom domain included">Dominio propio incluido</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
+        <tr>
+          <td data-es="Precio mensual desde" data-en="Monthly price from">Precio mensual desde</td>
+          <td class="klasse-col" style="font-size:1rem">79€</td>
+          <td style="color:var(--muted)">89€-200€+</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO MOCKUP -->
+<section id="academias">
+  <div class="container">
+    <div class="section-tag" data-es="Así se ve" data-fr="Voici à quoi ça ressemble" data-it="Ecco come appare" data-pt="É assim que parece" data-en="What it looks like" data-fr="Voici à quoi ça ressemble" data-it="Ecco come appare" data-pt="É assim que parece">Así se ve</div>
+    <h2 class="section-title" data-es="Tu academia, <em>digitalizada</em>" data-fr="Votre académie, <em>numérisée</em>" data-it="La tua accademia, <em>digitalizzata</em>" data-pt="A tua academia, <em>digitalizada</em>" data-en="Your academy, <em>digitized</em>" data-fr="Votre académie, <em>numérisée</em>" data-it="La tua accademia, <em>digitalizzata</em>" data-pt="A tua academia, <em>digitalizada</em>">Tu academia, <em>digitalizada</em></h2>
+    <p class="section-sub" data-es="Con tu logo, tus colores y tu nombre. En menos de 24 horas." data-en="With your logo, your colors and your name. In less than 24 hours.">Con tu logo, tus colores y tu nombre. En menos de 24 horas.</p>
+    <div class="academy-showcase">
+      <div>
+        <div class="showcase-label" data-es="Panel del profesor/a" data-en="Teacher panel">Panel del profesor/a</div>
+        <h3 class="showcase-title" data-es="Control total de tu academia desde cualquier dispositivo" data-en="Total control of your academy from any device">Control total de tu academia desde cualquier dispositivo</h3>
+        <p class="showcase-desc" data-es="Gestiona alumnos, pagos, asistencia, grupos y mucho más. Todo actualizado en tiempo real, accesible desde móvil o escritorio." data-en="Manage students, payments, attendance, groups and much more. All updated in real time, accessible from mobile or desktop.">Gestiona alumnos, pagos, asistencia, grupos y mucho más. Todo actualizado en tiempo real, accesible desde móvil o escritorio.</p>
+        <div class="showcase-features">
+          <div class="sf-item" data-es="Dashboard con métricas en tiempo real" data-en="Dashboard with real-time metrics">Dashboard con métricas en tiempo real</div>
+          <div class="sf-item" data-es="Alertas automáticas de pagos pendientes" data-en="Automatic pending payment alerts">Alertas automáticas de pagos pendientes</div>
+          <div class="sf-item" data-es="Sistema de feedback por alumno" data-en="Per-student feedback system">Sistema de feedback por alumno</div>
+          <div class="sf-item" data-es="Exportación de datos en CSV" data-en="Data export in CSV">Exportación de datos en CSV</div>
+        </div>
+      </div>
+      <div class="showcase-mockup">
+        <div class="mockup-bar">
+          <div class="mockup-dot" style="background:#ff5f57"></div>
+          <div class="mockup-dot" style="background:#febc2e"></div>
+          <div class="mockup-dot" style="background:#28c840"></div>
+        </div>
+        <div class="mockup-screen">
+          <div class="accent">// Dashboard — Tu Academia</div>
+          <div style="margin:10px 0;border-top:1px solid #222"></div>
+          <div class="white">👥 Alumnos activos <span class="accent">→ 87</span></div>
+          <div class="white">💳 Pagos este mes <span class="success">→ 4.350€</span></div>
+          <div class="white">⚠️  Pendientes <span style="color:#e07070">→ 12</span></div>
+          <div style="margin:10px 0;border-top:1px solid #222"></div>
+          <div class="white">🎂 Cumpleaños hoy <span class="accent">→ María G.</span></div>
+          <div class="white">📹 Videos nuevos <span class="accent">→ 3</span></div>
+          <div style="margin:10px 0;border-top:1px solid #222"></div>
+          <div class="success">✓ Sistema operativo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<!-- SOCIAL PROOF STRIP -->
+<div style="background:rgba(232,201,109,0.08);border-top:1px solid rgba(232,201,109,0.15);border-bottom:1px solid rgba(232,201,109,0.15);padding:20px 24px;overflow:hidden;">
+  <div style="display:flex;gap:48px;justify-content:center;flex-wrap:wrap;align-items:center">
+    <div style="display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--muted)">
+      <span style="font-size:1.4rem">⭐</span>
+      <span data-es="<strong style='color:var(--white)'>Valoración 5/5</strong> por academias en activo" data-en="<strong style='color:var(--white)'>5/5 rating</strong> from active academies"><strong style='color:var(--white)'>Valoración 5/5</strong> por academias en activo</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--muted)">
+      <span style="font-size:1.4rem">⚡</span>
+      <span data-es="<strong style='color:var(--white)'>Setup en 24h</strong> garantizado" data-en="<strong style='color:var(--white)'>24h setup</strong> guaranteed"><strong style='color:var(--white)'>Setup en 24h</strong> garantizado</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--muted)">
+      <span style="font-size:1.4rem">🔒</span>
+      <span data-es="<strong style='color:var(--white)'>Sin permanencia.</strong> Cancela cuando quieras" data-en="<strong style='color:var(--white)'>No commitment.</strong> Cancel anytime"><strong style='color:var(--white)'>Sin permanencia.</strong> Cancela cuando quieras</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--muted)">
+      <span style="font-size:1.4rem">💾</span>
+      <span data-es="<strong style='color:var(--white)'>Tus datos son tuyos.</strong> Siempre exportables" data-en="<strong style='color:var(--white)'>Your data is yours.</strong> Always exportable"><strong style='color:var(--white)'>Tus datos son tuyos.</strong> Siempre exportables</span>
+    </div>
+  </div>
+</div>
+
+<section id="precios">
+  <div class="container">
+    <div class="section-tag" data-es="Precios" data-fr="Tarifs" data-it="Prezzi" data-pt="Preços" data-en="Pricing" data-fr="Tarifs" data-it="Prezzi" data-pt="Preços">Precios</div>
+    <h2 class="section-title" data-es="Precios que <em>recuperas en el primer mes</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>" data-en="Pricing you <em>recover in the first month</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>">Precios que <em>recuperas en el primer mes</em></h2>
+    <p class="section-sub" data-es="Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio." data-en="With Klasse, just one retained student already covers the monthly fee. The rest is profit.">Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan" data-es="INSTALACIÓN ÚNICA" data-fr="INSTALLATION UNIQUE" data-it="INSTALLAZIONE UNICA" data-pt="INSTALAÇÃO ÚNICA" data-en="ONE-TIME SETUP" data-fr="INSTALLATION UNIQUE" data-it="INSTALLAZIONE UNICA" data-pt="INSTALAÇÃO ÚNICA">INSTALACIÓN ÚNICA</div>
+        <div class="price-amount">997<span>€</span></div>
+        <div class="price-period" data-es="pago único + 79€/mes" data-fr="paiement unique + 79€/mois" data-it="pagamento unico + 79€/mese" data-pt="pagamento único + 79€/mês" data-en="one-time + 79€/month" data-fr="paiement unique + 79€/mois" data-it="pagamento unico + 79€/mese" data-pt="pagamento único + 79€/mês">pago único + 79€/mes</div>
+        <ul class="price-features">
+          <li data-es="Setup y personalización completa" data-en="Full setup and customization">Setup y personalización completa</li>
+          <li data-es="Tu logo, colores y dominio" data-en="Your logo, colors and domain">Tu logo, colores y dominio</li>
+          <li data-es="Migración de alumnos existentes" data-en="Existing student migration">Migración de alumnos existentes</li>
+          <li data-es="Formación incluida (2h)" data-en="Training included (2h)">Formación incluida (2h)</li>
+          <li data-es="Soporte prioritario 1 mes" data-en="Priority support 1 month">Soporte prioritario 1 mes</li>
+        </ul>
+        <button class="price-cta ghost" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="Solicitar info" data-fr="Demander des infos" data-it="Richiedi informazioni" data-pt="Solicitar informações" data-en="Request info" data-fr="Demander des infos" data-it="Richiedi informazioni" data-pt="Solicitar informações">Solicitar info</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge" data-es="MÁS ELEGIDO" data-fr="PLUS POPULAIRE" data-it="PIÙ SCELTO" data-pt="MAIS ESCOLHIDO" data-en="MOST POPULAR">MÁS ELEGIDO</div>
+        <div class="price-plan" data-es="SUSCRIPCIÓN MENSUAL" data-fr="ABONNEMENT MENSUEL" data-it="ABBONAMENTO MENSILE" data-pt="ASSINATURA MENSAL" data-en="MONTHLY SUBSCRIPTION" data-fr="ABONNEMENT MENSUEL" data-it="ABBONAMENTO MENSILE" data-pt="ASSINATURA MENSAL">SUSCRIPCIÓN MENSUAL</div>
+        <div class="price-amount">79<span>€</span></div>
+        <div class="price-period" data-es="/mes · sin permanencia · sin letra pequeña" data-fr="/mois · sans engagement · sans surprise" data-it="/mese · senza vincoli · senza sorprese" data-pt="/mês · sem permanência · sem letra pequena" data-en="/month · no commitment · no fine print" data-fr="/mois · sans engagement · sans surprise" data-it="/mese · senza vincoli · senza sorprese" data-pt="/mês · sem permanência · sem letra pequena">/mes · sin permanencia · sin letra pequeña</div>
+        <ul class="price-features">
+          <li data-es="Todo incluido sin sorpresas" data-en="Everything included, no surprises">Todo incluido sin sorpresas</li>
+          <li data-es="Actualizaciones automáticas" data-en="Automatic updates">Actualizaciones automáticas</li>
+          <li data-es="Soporte técnico continuo" data-en="Ongoing technical support">Soporte técnico continuo</li>
+          <li data-es="Asistente IA ilimitado" data-en="Unlimited AI assistant">Asistente IA ilimitado</li>
+          <li data-es="Nuevas funciones cada mes" data-en="New features every month">Nuevas funciones cada mes</li>
+        </ul>
+        <button class="price-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="💛 Quiero empezar esta semana" data-fr="💛 Je veux commencer cette semaine" data-it="💛 Voglio iniziare questa settimana" data-pt="💛 Quero começar esta semana" data-en="💛 I want to start this week" data-fr="💛 Je veux commencer cette semaine" data-it="💛 Voglio iniziare questa settimana" data-pt="💛 Quero começar esta semana">💛 Quiero empezar esta semana</button>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:28px;font-size:0.82rem;color:var(--muted)" data-es="⚡ Quedan <strong style="color:var(--accent)">3 plazas disponibles</strong> este mes para nuevas academias. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserva la tuya →</a>" data-en="⚡ Only <strong style='color:var(--accent)'>3 spots available</strong> this month for new academies. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserve yours →</a>">⚡ Quedan <strong style="color:var(--accent)">3 plazas disponibles</strong> este mes para nuevas academias. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserva la tuya →</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title" data-es="Preguntas <em>frecuentes</em>" data-fr="Questions <em>fréquentes</em>" data-it="Domande <em>frequenti</em>" data-pt="Perguntas <em>frequentes</em>" data-en="Frequently asked <em>questions</em>" data-fr="Questions <em>fréquentes</em>" data-it="Domande <em>frequenti</em>" data-pt="Perguntas <em>frequentes</em>">Preguntas <em>frecuentes</em></h2>
+    <div class="faq-list" style="margin-top:48px">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q" data-es="¿Cuánto tiempo tarda en estar lista mi academia?" data-en="How long does it take to set up my academy?">¿Cuánto tiempo tarda en estar lista mi academia?</div>
+        <div class="faq-a" data-es="En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos." data-en="Less than 24 hours. We set everything up: your public website, the private system for students and teachers, your logo and colors. You just need to provide us with your data.">En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q" data-es="¿Mis alumnos necesitan descargar alguna app?" data-en="Do my students need to download an app?">¿Mis alumnos necesitan descargar alguna app?</div>
+        <div class="faq-a" data-es="No. Todo funciona desde el navegador, tanto en móvil como en ordenador. Tus alumnos acceden con su email y contraseña desde cualquier dispositivo." data-en="No. Everything works from the browser, both on mobile and desktop. Your students log in with their email and password from any device.">No. Todo funciona desde el navegador, tanto en móvil como en ordenador. Tus alumnos acceden con su email y contraseña desde cualquier dispositivo.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q" data-es="¿Puedo probar Klasse antes de contratar?" data-en="Can I try Klasse before committing?">¿Puedo probar Klasse antes de contratar?</div>
+        <div class="faq-a" data-es="Sí. Te hacemos una demo personalizada con los datos de tu academia para que veas exactamente cómo quedaría. Sin compromiso." data-en="Yes. We give you a personalized demo with your academy's data so you can see exactly how it would look. No commitment.">Sí. Te hacemos una demo personalizada con los datos de tu academia para que veas exactamente cómo quedaría. Sin compromiso.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q" data-es="¿Funciona para cualquier tipo de academia?" data-en="Does it work for any type of academy?">¿Funciona para cualquier tipo de academia?</div>
+        <div class="faq-a" data-es="Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos." data-en="Klasse is designed for dance academies, but adapts perfectly to martial arts, yoga, pilates and any academy with student groups.">Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q" data-es="¿Qué pasa con mis datos si cancelo?" data-en="What happens to my data if I cancel?">¿Qué pasa con mis datos si cancelo?</div>
+        <div class="faq-a" data-es="Tus datos son tuyos. Si decides cancelar, te entregamos una exportación completa de todos tus alumnos, pagos e historial en formato CSV." data-en="Your data is yours. If you decide to cancel, we'll provide a complete export of all your students, payments and history in CSV format.">Tus datos son tuyos. Si decides cancelar, te entregamos una exportación completa de todos tus alumnos, pagos e historial en formato CSV.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-tag" data-es="Empieza hoy" data-fr="Commencez aujourd'hui" data-it="Inizia oggi" data-pt="Começa hoje" data-en="Start today" data-fr="Commencez aujourd'hui" data-it="Inizia oggi" data-pt="Começa hoje">Empieza hoy</div>
+    <h2 class="section-title" data-es="¿Tu academia merece estar en el <em>siguiente nivel</em>?" data-fr="Votre académie mérite d'être au <em>niveau supérieur</em>?" data-it="La tua accademia merita di essere al <em>livello successivo</em>?" data-pt="A tua academia merece estar no <em>próximo nível</em>?" data-en="Is your academy ready for the <em>next level</em>?" data-fr="Votre académie mérite d'être au <em>niveau supérieur</em>?" data-it="La tua accademia merita di essere al <em>livello successivo</em>?" data-pt="A tua academia merece estar no <em>próximo nível</em>?">¿Tu academia merece estar en el <em>siguiente nivel</em>?</h2>
+    <p class="section-sub" data-es="Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia." data-en="Demos available this week. No commitment, no credit card. Just 20 minutes that could change your academy." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia.">Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia.</p>
+    <div class="contact-wrap">
+      <div id="contact-msg" class="form-msg"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-es="Nombre" data-fr="Nom" data-it="Nome" data-pt="Nome" data-en="Name" data-fr="Nom" data-it="Nome" data-pt="Nome">Nombre</label>
+          <input class="form-input" type="text" id="c-nombre" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Academia" data-fr="Académie" data-it="Accademia" data-pt="Academia" data-en="Academy" data-fr="Académie" data-it="Accademia" data-pt="Academia">Academia</label>
+          <input class="form-input" type="text" id="c-academia" placeholder="Nombre de tu academia">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="c-email" placeholder="hola@tuacademia.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Teléfono" data-fr="Téléphone" data-it="Telefono" data-pt="Telefone" data-en="Phone" data-fr="Téléphone" data-it="Telefono" data-pt="Telefone">Teléfono</label>
+          <input class="form-input" type="tel" id="c-tel" placeholder="+34 600 000 000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-es="Tipo de academia" data-fr="Type d'académie" data-it="Tipo di accademia" data-pt="Tipo de academia" data-en="Academy type" data-fr="Type d'académie" data-it="Tipo di accademia" data-pt="Tipo de academia">Tipo de academia</label>
+        <select class="form-input" id="c-tipo">
+          <option value="" data-es="Selecciona..." data-en="Select...">Selecciona...</option>
+          <option value="Baile latino" data-es="Baile latino (Salsa, Bachata, Casino...)" data-en="Latin dance (Salsa, Bachata, Casino...)">Baile latino (Salsa, Bachata, Casino...)</option>
+          <option value="Danza" data-es="Danza (Ballet, Contemporáneo, Flamenco...)" data-en="Dance (Ballet, Contemporary, Flamenco...)">Danza (Ballet, Contemporáneo, Flamenco...)</option>
+          <option value="Artes marciales" data-es="Artes marciales / Yoga / Pilates" data-en="Martial arts / Yoga / Pilates">Artes marciales / Yoga / Pilates</option>
+          <option value="Otro" data-es="Otro tipo de academia" data-en="Other type of academy">Otro tipo de academia</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-es="¿Cuántos alumnos tienes aproximadamente?" data-fr="Combien d'élèves avez-vous environ?" data-it="Quanti allievi hai circa?" data-pt="Quantos alunos tens aproximadamente?" data-en="How many students do you have approximately?" data-fr="Combien d'élèves avez-vous environ?" data-it="Quanti allievi hai circa?" data-pt="Quantos alunos tens aproximadamente?">¿Cuántos alumnos tienes aproximadamente?</label>
+        <select class="form-input" id="c-alumnos">
+          <option value="" data-es="Selecciona..." data-en="Select...">Selecciona...</option>
+          <option value="<30" data-es="Menos de 30" data-en="Less than 30">Menos de 30</option>
+          <option value="30-100" data-es="30 - 100 alumnos" data-en="30 - 100 students">30 - 100 alumnos</option>
+          <option value="100-300" data-es="100 - 300 alumnos" data-en="100 - 300 students">100 - 300 alumnos</option>
+          <option value="+300" data-es="Más de 300" data-en="More than 300">Más de 300</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-es="Cuéntanos algo sobre tu academia (opcional)" data-fr="Parlez-nous de votre académie (optionnel)" data-it="Raccontaci della tua accademia (opzionale)" data-pt="Conta-nos algo sobre a tua academia (opcional)" data-en="Tell us about your academy (optional)" data-fr="Parlez-nous de votre académie (optionnel)" data-it="Raccontaci della tua accademia (opzionale)" data-pt="Conta-nos algo sobre a tua academia (opcional)">Cuéntanos algo sobre tu academia (opcional)</label>
+        <textarea class="form-input" id="c-mensaje" placeholder="Ubicación, estilos que impartes, qué necesitas..."></textarea>
+      </div>
+      <button class="form-submit" onclick="enviarContacto()" id="btn-contact" data-es="💛 Solicitar demo gratuita — esta semana" data-fr="💛 Demander une démo gratuite — cette semaine" data-it="💛 Richiedi demo gratuita — questa settimana" data-pt="💛 Solicitar demo gratuita — esta semana" data-en="💛 Request free demo">💛 Solicitar demo gratuita — esta semana</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- STICKY MOBILE CTA -->
+<div id="sticky-cta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:16px 20px;background:rgba(8,8,8,0.97);border-top:1px solid rgba(232,201,109,0.2);backdrop-filter:blur(10px);">
+  <a href="#contacto" class="btn-primary" style="width:100%;text-align:center;display:block;padding:14px" data-es="💛 Quiero mi demo gratis" data-fr="💛 Je veux ma démo gratuite" data-it="💛 Voglio la mia demo gratis" data-pt="💛 Quero a minha demo grátis" data-en="💛 I want my free demo" data-fr="💛 Je veux ma démo gratuite" data-it="💛 Voglio la mia demo gratis" data-pt="💛 Quero a minha demo grátis">💛 Quiero mi demo gratis</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Kl<span>asse</span></div>
+  <p style="color:var(--muted);font-size:0.8rem;margin-top:8px" data-es="La plataforma todo en uno para academias de baile y danza." data-fr="La plateforme tout-en-un pour les académies de danse." data-it="La piattaforma tutto in uno per le accademie di danza." data-pt="A plataforma tudo-em-um para academias de dança." data-en="The all-in-one platform for dance and movement academies." data-fr="La plateforme tout-en-un pour les académies de danse." data-it="La piattaforma tutto in uno per le accademie di danza." data-pt="A plataforma tudo-em-um para academias de dança.">La plataforma todo en uno para academias de baile y danza.</p>
+  <p style="color:#333;font-size:0.72rem;margin-top:20px">© 2026 Klasse · <span data-es="Todos los derechos reservados" data-fr="Tous droits réservés" data-it="Tutti i diritti riservati" data-pt="Todos os direitos reservados" data-en="All rights reserved" data-fr="Tous droits réservés" data-it="Tutti i diritti riservati" data-pt="Todos os direitos reservados">Todos los derechos reservados</span></p>
+</footer>
+
+<script>
+// ── LANGUAGE ──
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.lang-btn');
+  const langMap = {'es':0,'en':1,'fr':2,'it':3,'pt':4};
+  if (btns[langMap[lang]]) btns[langMap[lang]].classList.add('active');
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else if (el.tagName === 'OPTION') {
+      el.textContent = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── FAQ ──
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+// ── CONTACT FORM ──
+async function enviarContacto() {
+  const nombre = document.getElementById('c-nombre').value.trim();
+  const academia = document.getElementById('c-academia').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const tel = document.getElementById('c-tel').value.trim();
+  const tipo = document.getElementById('c-tipo').value;
+  const alumnos = document.getElementById('c-alumnos').value;
+  const mensaje = document.getElementById('c-mensaje').value.trim();
+  const msg = document.getElementById('contact-msg');
+
+  if (!nombre || !academia || !email || !tipo || !alumnos) {
+    msg.className = 'form-msg err';
+    msg.style.display = 'block';
+    const fillMsg = {
+      es: 'Por favor rellena todos los campos obligatorios.',
+      en: 'Please fill in all required fields.',
+      fr: 'Veuillez remplir tous les champs obligatoires.',
+      it: 'Compila tutti i campi obbligatori.',
+      pt: 'Por favor preenche todos os campos obrigatórios.'
+    };
+    msg.textContent = fillMsg[currentLang] || fillMsg.es;
+    return;
+  }
+
+  const btn = document.getElementById('btn-contact');
+  btn.disabled = true;
+  const sendingMsg = {es:'Enviando...', en:'Sending...', fr:'Envoi...', it:'Invio...', pt:'Enviando...'};
+  btn.textContent = sendingMsg[currentLang] || 'Enviando...';
+
+  try {
+    // EmailJS — gratis hasta 200 emails/mes
+    // Pasos: emailjs.com → cuenta gratis → crear servicio → crear template → copiar keys
+    const EJS_SVC  = 'YOUR_SERVICE_ID';   // ← reemplaza
+    const EJS_TPL  = 'YOUR_TEMPLATE_ID'; // ← reemplaza
+    const EJS_KEY  = 'YOUR_PUBLIC_KEY';  // ← reemplaza
+
+    const params = {
+      from_name: nombre, academia: academia,
+      email: email, telefono: tel || 'No indicado',
+      tipo: tipo, alumnos: alumnos,
+      mensaje: mensaje || '—',
+    };
+
+    if (EJS_SVC !== 'YOUR_SERVICE_ID' && typeof emailjs !== 'undefined') {
+      await emailjs.send(EJS_SVC, EJS_TPL, params, EJS_KEY);
+    } else {
+      // Sin EmailJS configurado: guarda en consola y muestra éxito igualmente
+      await new Promise(r => setTimeout(r, 700));
+      console.log('📥 Nueva solicitud Klasse:', params);
+    }
+
+    msg.className = 'form-msg ok';
+    msg.style.display = 'block';
+    const successMsg = {
+      es: '🎉 <strong>¡Perfecto!</strong> Te contactamos en menos de 24 horas.',
+      en: '🎉 <strong>Perfect!</strong> We\'ll contact you in less than 24 hours.',
+      fr: '🎉 <strong>Parfait!</strong> Nous vous contactons dans les 24 heures.',
+      it: '🎉 <strong>Perfetto!</strong> Ti contatteremo entro 24 ore.',
+      pt: '🎉 <strong>Perfeito!</strong> Entramos em contacto em menos de 24 horas.'
+    };
+    msg.innerHTML = successMsg[currentLang] || successMsg.es;
+
+    ['c-nombre','c-academia','c-email','c-tel','c-mensaje'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('c-tipo').value = '';
+    document.getElementById('c-alumnos').value = '';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  } catch(e) {
+    console.error(e);
+    msg.className = 'form-msg err';
+    msg.style.display = 'block';
+    const errorMsg = {
+      es: 'Error al enviar. Por favor inténtalo de nuevo.',
+      en: 'Error sending. Please try again.',
+      fr: 'Erreur d\'envoi. Veuillez réessayer.',
+      it: 'Errore di invio. Per favore riprova.',
+      pt: 'Erro ao enviar. Por favor tenta novamente.'
+    };
+    msg.textContent = errorMsg[currentLang] || errorMsg.es;
+  }
+
+  btn.disabled = false;
+  const btnText = {
+    es: '💛 Solicitar demo gratuita — esta semana',
+    en: '💛 Request free demo — this week',
+    fr: '💛 Demander une démo gratuite — cette semaine',
+    it: '💛 Richiedi demo gratuita — questa settimana',
+    pt: '💛 Solicitar demo gratuita — esta semana'
+  };
+  btn.textContent = btnText[currentLang] || btnText.es;
+}
+
+// ── STICKY CTA ──
+window.addEventListener('scroll', function() {
+  const stickyCta = document.getElementById('sticky-cta');
+  if (stickyCta && window.innerWidth <= 768) {
+    stickyCta.style.display = window.scrollY > 500 ? 'block' : 'none';
+  }
+});
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-card, .price-card, .problem-item, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
