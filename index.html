@@ -2,10 +2,14 @@
 <html lang="es" style="scroll-behavior:smooth">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="software academia baile, gestión academia danza, app academia baile, programa gestión alumnos danza, software escuela baile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💃</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Klasse — La app que tu academia merece</title>
-<meta name="description" content="Klasse es la plataforma todo en uno para academias de baile y danza. Gestión, comunidad y asistente IA en una sola app.">
+<meta name="description" content="Klasse es el software de gestión para academias de baile y danza. Controla alumnos, pagos, asistencia y comunicación con asistente IA incluido.">
 <meta property="og:title" content="Klasse — La app que tu academia merece">
 <meta property="og:description" content="Gestión, comunidad y asistente IA en una sola plataforma. Setup en 24h. Sin permanencia.">
 <meta property="og:type" content="website">
@@ -401,12 +405,48 @@ footer {
   .compare-table th, .compare-table td { padding: 12px 14px; }
 }
 @media(max-width: 480px) {
+  .nav-cta { display: none; }
+  .lang-btn { padding: 5px 7px; font-size: 0.65rem; }
   .hero-ctas { flex-direction: column; align-items: center; width: 100%; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   .hero-stats { gap: 24px; }
   .pricing-grid { grid-template-columns: 1fr; }
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Klasse",
+  "description": "Plataforma todo en uno para academias de baile y danza. Gestión de alumnos, pagos, asistencia, comunicación y asistente IA.",
+  "url": "https://klasseapp.com",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, iOS, Android",
+  "offers": {
+    "@type": "Offer",
+    "price": "79",
+    "priceCurrency": "EUR",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "79",
+      "priceCurrency": "EUR",
+      "unitText": "MONTH"
+    }
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Klasse",
+    "url": "https://klasseapp.com"
+  }
+}
+</script>
+<link rel="alternate" hreflang="es" href="https://klasseapp.com">
+<link rel="alternate" hreflang="en" href="https://klasseapp.com">
+<link rel="alternate" hreflang="fr" href="https://klasseapp.com">
+<link rel="alternate" hreflang="it" href="https://klasseapp.com">
+<link rel="alternate" hreflang="pt" href="https://klasseapp.com">
+<link rel="alternate" hreflang="x-default" href="https://klasseapp.com">
 </head>
 <body>
 
@@ -414,11 +454,11 @@ footer {
 <nav id="navbar">
   <a href="#inicio" style="text-decoration:none"><div class="nav-logo">Kl<span>asse</span></div></a>
   <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('es')">ES</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('fr')">FR</button>
-    <button class="lang-btn" onclick="setLang('it')">IT</button>
-    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn active" onclick="setLang('es')" aria-label="Español">ES</button>
+    <button class="lang-btn" onclick="setLang('en')" aria-label="English">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')" aria-label="Français">FR</button>
+    <button class="lang-btn" onclick="setLang('it')" aria-label="Italiano">IT</button>
+    <button class="lang-btn" onclick="setLang('pt')" aria-label="Português">PT</button>
   </div>
   <a href="#contacto" class="nav-cta" data-es="Solicitar demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo" data-en="Request demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo">Solicitar demo</a>
 </nav>
@@ -426,7 +466,7 @@ footer {
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
-  <div class="hero-tag" data-es="✦ Más de 45 academias ya están en Klasse" data-en="✦ Join 45+ academies already using Klasse">✦ Más de 45 academias ya están en Klasse</div>
+  <div class="hero-tag" data-es="✦ Más de 45 academias ya están en Klasse" data-fr="✦ Plus de 45 académies utilisent déjà Klasse" data-it="✦ Oltre 45 accademie usano già Klasse" data-pt="✦ Mais de 45 academias já usam o Klasse" data-en="✦ Join 45+ academies already using Klasse">✦ Más de 45 academias ya están en Klasse</div>
   <h1 class="hero-title">
     <span class="k">Kl</span><span class="italic">asse</span>
   </h1>
@@ -462,23 +502,23 @@ footer {
   <div class="container">
     <div class="section-tag" data-es="El problema" data-fr="Le problème" data-it="Il problema" data-pt="O problema" data-en="The problem" data-fr="Le problème" data-it="Il problema" data-pt="O problema">El problema</div>
     <h2 class="section-title" data-es="Gestionar una academia sin Klasse es perder <em>dinero y tiempo</em>" data-fr="Gérer une académie sans Klasse, c'est perdre <em>argent et temps</em>" data-it="Gestire un'accademia senza Klasse significa perdere <em>soldi e tempo</em>" data-pt="Gerir uma academia sem Klasse é perder <em>dinheiro e tempo</em>" data-en="Managing an academy without Klasse means losing <em>money and time</em>" data-fr="Gérer une académie sans Klasse, c'est perdre <em>argent et temps</em>" data-it="Gestire un'accademia senza Klasse significa perdere <em>soldi e tempo</em>" data-pt="Gerir uma academia sem Klasse é perder <em>dinheiro e tempo</em>">Gestionar una academia sin Klasse es perder <em>dinero y tiempo</em></h2>
-    <p class="section-sub" data-es="Cada mes pierdes dinero por pagos sin controlar y alumnos que se van sin avisar. Con Klasse, todo eso se acaba." data-en="Every month you lose money from untracked payments and students leaving without notice. With Klasse, all that ends.">Cada mes pierdes dinero por pagos sin controlar y alumnos que se van sin avisar. Con Klasse, todo eso se acaba.</p>
+    <p class="section-sub" data-es="Cada mes pierdes dinero por pagos sin controlar en tu academia de baile o danza, y alumnos que se van sin avisar. Con Klasse, todo eso se acaba." data-fr="Chaque mois vous perdez de l'argent en paiements non suivis. Avec Klasse, tout ça prend fin." data-it="Ogni mese perdi soldi per pagamenti non tracciati. Con Klasse, tutto questo finisce." data-pt="Cada mês perdes dinheiro com pagamentos não controlados. Com Klasse, tudo isso acaba." data-en="Every month you lose money from untracked payments and students leaving without notice. With Klasse, all that ends.">Cada mes pierdes dinero por pagos sin controlar y alumnos que se van sin avisar. Con Klasse, todo eso se acaba.</p>
     <div class="problem-grid">
       <div class="problem-item">
         <span class="problem-icon">😤</span>
-        <div class="problem-text"><strong data-es="Pagos sin control" data-en="Untracked payments">Pagos sin control</strong><span data-es="Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos." data-en="Every month you lose hundreds in forgotten payments. With Klasse, billing manages itself.">Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos.</span></div>
+        <div class="problem-text"><strong data-es="Pagos sin control" data-fr="Paiements non suivis" data-it="Pagamenti non tracciati" data-pt="Pagamentos sem controlo" data-en="Untracked payments">Pagos sin control</strong><span data-es="Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos." data-fr="Chaque mois vous perdez des centaines d'euros. Avec Klasse, la facturation se gère seule." data-it="Ogni mese perdi centinaia di euro. Con Klasse, la fatturazione si gestisce da sola." data-pt="Cada mês perdes centenas de euros. Com Klasse, a cobrança gere-se sozinha." data-en="Every month you lose hundreds in forgotten payments. With Klasse, billing manages itself.">Cada mes pierdes cientos de euros en pagos olvidados. Con Klasse los cobros se gestionan solos.</span></div>
       </div>
       <div class="problem-item">
         <span class="problem-icon">📱</span>
-        <div class="problem-text"><strong data-es="WhatsApp eterno" data-en="Endless WhatsApp">WhatsApp eterno</strong><span data-es="Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional." data-en="WhatsApp groups nobody reads, students missing info. With Klasse you have professional communication.">Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional.</span></div>
+        <div class="problem-text"><strong data-es="WhatsApp eterno" data-fr="WhatsApp sans fin" data-it="WhatsApp infinito" data-pt="WhatsApp eterno" data-en="Endless WhatsApp">WhatsApp eterno</strong><span data-es="Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional." data-fr="Groupes WhatsApp que personne ne lit. Avec Klasse vous avez une communication professionnelle." data-it="Gruppi WhatsApp che nessuno legge. Con Klasse hai una comunicazione professionale." data-pt="Grupos WhatsApp que ninguém lê. Com Klasse tens comunicação profissional." data-en="WhatsApp groups nobody reads, students missing info. With Klasse you have professional communication.">Grupos de WhatsApp que nadie lee, alumnos que no se enteran. Con Klasse tienes comunicación profesional.</span></div>
       </div>
       <div class="problem-item">
         <span class="problem-icon">📉</span>
-        <div class="problem-text"><strong data-es="Alumnos que se van" data-en="Students dropping out">Alumnos que se van</strong><span data-es="Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan." data-en="Without engagement, students get bored and leave. Klasse builds the community that keeps them coming back.">Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan.</span></div>
+        <div class="problem-text"><strong data-es="Alumnos que se van" data-fr="Élèves qui partent" data-it="Alunni che se ne vanno" data-pt="Alunos que saem" data-en="Students dropping out">Alumnos que se van</strong><span data-es="Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan." data-fr="Sans engagement, vos élèves s'ennuient et partent. Klasse crée la communauté qui les fait revenir." data-it="Senza engagement, i tuoi alunni si annoiano e se ne vanno. Klasse crea la comunità che li fa tornare." data-pt="Sem engagement, os teus alunos aborrecem-se e saem. Klasse cria a comunidade que os faz voltar." data-en="Without engagement, students get bored and leave. Klasse builds the community that keeps them coming back.">Sin engagement, tus alumnos se aburren y se van. Klasse crea la comunidad que hace que vuelvan.</span></div>
       </div>
       <div class="problem-item">
         <span class="problem-icon">⏰</span>
-        <div class="problem-text"><strong data-es="Horas perdidas" data-en="Hours wasted">Horas perdidas</strong><span data-es="Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar." data-en="10+ hours a week wasted on tasks Klasse handles automatically. Time you could spend dancing.">Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar.</span></div>
+        <div class="problem-text"><strong data-es="Horas perdidas" data-fr="Heures perdues" data-it="Ore perse" data-pt="Horas perdidas" data-en="Hours wasted">Horas perdidas</strong><span data-es="Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar." data-fr="Plus de 10 heures par semaine perdues sur des tâches que Klasse gère automatiquement." data-it="Più di 10 ore settimanali perse in attività che Klasse gestisce automaticamente." data-pt="Mais de 10 horas semanais perdidas em tarefas que o Klasse gere automaticamente." data-en="10+ hours a week wasted on tasks Klasse handles automatically. Time you could spend dancing.">Más de 10 horas semanales perdidas en tareas que Klasse hace automáticamente. Tiempo que podrías dedicar a bailar.</span></div>
       </div>
     </div>
   </div>
@@ -493,13 +533,13 @@ footer {
     <div class="features-grid">
       <div class="feature-card">
         <span class="feature-icon">🤖</span>
-        <div class="feature-title" data-es="Asistente IA" data-en="AI Assistant">Asistente IA</div>
+        <div class="feature-title" data-es="Asistente IA" data-fr="Assistant IA" data-it="Assistente IA" data-pt="Assistente IA" data-en="AI Assistant">Asistente IA</div>
         <div class="feature-desc" data-es="Tu academia tiene su propio ChatGPT privado. Responde las dudas de tus alumnos a las 3 de la mañana si hace falta. Sin coste extra." data-en="Your academy gets its own private ChatGPT. It answers student questions at 3am if needed. No extra cost.">Tu academia tiene su propio ChatGPT privado. Responde las dudas de tus alumnos a las 3 de la mañana si hace falta. Sin coste extra.</div>
-        <span class="feature-tag" data-es="Exclusivo Klasse" data-en="Klasse exclusive">Exclusivo Klasse</span>
+        <span class="feature-tag" data-es="Exclusivo Klasse" data-fr="Exclusif Klasse" data-it="Esclusivo Klasse" data-pt="Exclusivo Klasse" data-en="Klasse exclusive">Exclusivo Klasse</span>
       </div>
       <div class="feature-card">
         <span class="feature-icon">💳</span>
-        <div class="feature-title" data-es="Gestión de pagos" data-en="Payment management">Gestión de pagos</div>
+        <div class="feature-title" data-es="Gestión de pagos" data-fr="Gestion des paiements" data-it="Gestione pagamenti" data-pt="Gestão de pagamentos" data-en="Payment management">Gestión de pagos</div>
         <div class="feature-desc" data-es="Genera los cobros de todos tus alumnos en un clic. Recibe alertas de impagos al instante. Nunca más una mensualidad perdida." data-en="Generate all your student payments in one click. Get instant alerts for missing payments. Never lose a monthly fee again.">Genera los cobros de todos tus alumnos en un clic. Recibe alertas de impagos al instante. Nunca más una mensualidad perdida.</div>
       </div>
       <div class="feature-card">
@@ -538,9 +578,9 @@ footer {
     <table class="compare-table">
       <thead>
         <tr>
-          <th style="text-align:left;color:var(--muted);font-weight:400" data-es="Funcionalidad" data-en="Feature">Funcionalidad</th>
+          <th style="text-align:left;color:var(--muted);font-weight:400" data-es="Funcionalidad" data-fr="Fonctionnalité" data-it="Funzionalità" data-pt="Funcionalidade" data-en="Feature">Funcionalidad</th>
           <th class="klasse-col">Klasse ✦</th>
-          <th class="other-col" data-es="Otros software" data-en="Other software">Otros software</th>
+          <th class="other-col" data-es="Otros software" data-fr="Autres logiciels" data-it="Altri software" data-pt="Outros software" data-en="Other software">Otros software</th>
         </tr>
       </thead>
       <tbody>
@@ -548,8 +588,8 @@ footer {
         <tr><td data-es="App exclusiva para alumnos" data-en="Exclusive student app">App exclusiva para alumnos</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
         <tr><td data-es="Landing pública incluida" data-en="Public website included">Landing pública incluida</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
         <tr><td data-es="Sistema de logros y gamificación" data-en="Achievement & gamification system">Sistema de logros y gamificación</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
-        <tr><td data-es="Gestión de pagos" data-en="Payment management">Gestión de pagos</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
-        <tr><td data-es="Control de asistencia" data-en="Attendance tracking">Control de asistencia</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
+        <tr><td data-es="Gestión de pagos" data-fr="Gestion des paiements" data-it="Gestione pagamenti" data-pt="Gestão de pagamentos" data-en="Payment management">Gestión de pagos</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
+        <tr><td data-es="Control de asistencia" data-fr="Contrôle des présences" data-it="Controllo presenze" data-pt="Controlo de presenças" data-en="Attendance tracking">Control de asistencia</td><td class="klasse-col check">✓</td><td class="check" style="color:var(--success)">✓</td></tr>
         <tr><td data-es="Contratos digitales" data-en="Digital contracts">Contratos digitales</td><td class="klasse-col check">✓</td><td>Algunos</td></tr>
         <tr><td data-es="Vídeos de clase privados" data-en="Private class videos">Vídeos de clase privados</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
         <tr><td data-es="Dominio propio incluido" data-en="Custom domain included">Dominio propio incluido</td><td class="klasse-col check">✓</td><td class="cross">✗</td></tr>
@@ -632,7 +672,7 @@ footer {
   <div class="container">
     <div class="section-tag" data-es="Precios" data-fr="Tarifs" data-it="Prezzi" data-pt="Preços" data-en="Pricing" data-fr="Tarifs" data-it="Prezzi" data-pt="Preços">Precios</div>
     <h2 class="section-title" data-es="Precios que <em>recuperas en el primer mes</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>" data-en="Pricing you <em>recover in the first month</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>">Precios que <em>recuperas en el primer mes</em></h2>
-    <p class="section-sub" data-es="Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio." data-en="With Klasse, just one retained student already covers the monthly fee. The rest is profit.">Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio.</p>
+    <p class="section-sub" data-es="Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio." data-fr="Avec Klasse, un seul élève retenu couvre déjà l'abonnement mensuel. Le reste est bénéfice." data-it="Con Klasse, un solo alunno in più trattenuto copre già la quota mensile. Il resto è profitto." data-pt="Com Klasse, um só aluno retido já paga a mensalidade. O resto é lucro." data-en="With Klasse, just one retained student already covers the monthly fee. The rest is profit.">Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio.</p>
     <div class="pricing-grid">
 
       <!-- PLAN ÚNICO -->
@@ -679,20 +719,20 @@ footer {
     <h2 class="section-title" data-es="Preguntas <em>frecuentes</em>" data-fr="Questions <em>fréquentes</em>" data-it="Domande <em>frequenti</em>" data-pt="Perguntas <em>frequentes</em>" data-en="Frequently asked <em>questions</em>" data-fr="Questions <em>fréquentes</em>" data-it="Domande <em>frequenti</em>" data-pt="Perguntas <em>frequentes</em>">Preguntas <em>frecuentes</em></h2>
     <div class="faq-list" style="margin-top:48px">
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q" data-es="¿Cuánto tiempo tarda en estar lista mi academia?" data-en="How long does it take to set up my academy?">¿Cuánto tiempo tarda en estar lista mi academia?</div>
-        <div class="faq-a" data-es="En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos." data-en="Less than 24 hours. We set everything up: your public website, the private system for students and teachers, your logo and colors. You just need to provide us with your data.">En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos.</div>
+        <div class="faq-q" data-es="¿Cuánto tiempo tarda en estar lista mi academia?" data-fr="Combien de temps faut-il pour configurer mon académie?" data-it="Quanto tempo ci vuole per configurare la mia accademia?" data-pt="Quanto tempo demora a ficar pronta a minha academia?" data-en="How long does it take to set up my academy?">¿Cuánto tiempo tarda en estar lista mi academia?</div>
+        <div class="faq-a" data-es="En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos." data-en="Less than 24 hours. We set everything up: your public website, the private system for students and teachers, your logo and colors." data-fr="Moins de 24 heures. Nous configurons tout: votre site web public, le système privé pour élèves et professeurs, votre logo et couleurs." data-it="Meno di 24 ore. Configuriamo tutto: il tuo sito web, il sistema privato per alunni e insegnanti, il tuo logo e colori." data-pt="Menos de 24 horas. Configuramos tudo: o teu site público, o sistema privado para alunos e professores, o teu logo e cores." data-fr="Moins de 24 heures. Nous configurons tout: votre site web, le système privé pour élèves et professeurs, votre logo." data-it="Meno di 24 ore. Configuriamo tutto: il tuo sito web, il sistema privato per alunni e insegnanti, il tuo logo." data-pt="Menos de 24 horas. Configuramos tudo: o teu site público, o sistema privado para alunos e professores, o teu logo." data-en="Less than 24 hours. We set everything up: your public website, the private system for students and teachers, your logo and colors. You just need to provide us with your data.">En menos de 24 horas. Configuramos todo: tu web pública, el sistema privado para alumnos y profesores, tu logo y colores. Tú solo tienes que facilitarnos los datos.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q" data-es="¿Mis alumnos necesitan descargar alguna app?" data-en="Do my students need to download an app?">¿Mis alumnos necesitan descargar alguna app?</div>
+        <div class="faq-q" data-es="¿Mis alumnos necesitan descargar alguna app?" data-fr="Mes élèves doivent-ils télécharger une app?" data-it="I miei alunni devono scaricare un'app?" data-pt="Os meus alunos precisam de descarregar uma app?" data-en="Do my students need to download an app?">¿Mis alumnos necesitan descargar alguna app?</div>
         <div class="faq-a" data-es="No. Todo funciona desde el navegador, tanto en móvil como en ordenador. Tus alumnos acceden con su email y contraseña desde cualquier dispositivo." data-en="No. Everything works from the browser, both on mobile and desktop. Your students log in with their email and password from any device.">No. Todo funciona desde el navegador, tanto en móvil como en ordenador. Tus alumnos acceden con su email y contraseña desde cualquier dispositivo.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q" data-es="¿Puedo probar Klasse antes de contratar?" data-en="Can I try Klasse before committing?">¿Puedo probar Klasse antes de contratar?</div>
+        <div class="faq-q" data-es="¿Puedo probar Klasse antes de contratar?" data-fr="Puis-je essayer Klasse avant de m'engager?" data-it="Posso provare Klasse prima di impegnarmi?" data-pt="Posso experimentar o Klasse antes de contratar?" data-en="Can I try Klasse before committing?">¿Puedo probar Klasse antes de contratar?</div>
         <div class="faq-a" data-es="Sí. Te hacemos una demo personalizada con los datos de tu academia para que veas exactamente cómo quedaría. Sin compromiso." data-en="Yes. We give you a personalized demo with your academy's data so you can see exactly how it would look. No commitment.">Sí. Te hacemos una demo personalizada con los datos de tu academia para que veas exactamente cómo quedaría. Sin compromiso.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q" data-es="¿Funciona para cualquier tipo de academia?" data-en="Does it work for any type of academy?">¿Funciona para cualquier tipo de academia?</div>
-        <div class="faq-a" data-es="Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos." data-en="Klasse is designed for dance academies, but adapts perfectly to martial arts, yoga, pilates and any academy with student groups.">Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos.</div>
+        <div class="faq-a" data-es="Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos." data-fr="Klasse est conçu pour les académies de danse, mais s'adapte parfaitement aux arts martiaux, yoga, pilates." data-it="Klasse è progettato per le accademie di danza, ma si adatta perfettamente alle arti marziali, yoga, pilates." data-pt="Klasse é pensado para academias de dança, mas adapta-se perfeitamente a artes marciais, yoga, pilates." data-en="Klasse is designed for dance academies, but adapts perfectly to martial arts, yoga, pilates and any academy with student groups.">Klasse está pensado para academias de baile y danza, pero se adapta perfectamente a artes marciales, yoga, pilates y cualquier academia con grupos de alumnos.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q" data-es="¿Qué pasa con mis datos si cancelo?" data-en="What happens to my data if I cancel?">¿Qué pasa con mis datos si cancelo?</div>
@@ -707,7 +747,7 @@ footer {
   <div class="container">
     <div class="section-tag" data-es="Empieza hoy" data-fr="Commencez aujourd'hui" data-it="Inizia oggi" data-pt="Começa hoje" data-en="Start today" data-fr="Commencez aujourd'hui" data-it="Inizia oggi" data-pt="Começa hoje">Empieza hoy</div>
     <h2 class="section-title" data-es="¿Tu academia merece estar en el <em>siguiente nivel</em>?" data-fr="Votre académie mérite d'être au <em>niveau supérieur</em>?" data-it="La tua accademia merita di essere al <em>livello successivo</em>?" data-pt="A tua academia merece estar no <em>próximo nível</em>?" data-en="Is your academy ready for the <em>next level</em>?" data-fr="Votre académie mérite d'être au <em>niveau supérieur</em>?" data-it="La tua accademia merita di essere al <em>livello successivo</em>?" data-pt="A tua academia merece estar no <em>próximo nível</em>?">¿Tu academia merece estar en el <em>siguiente nivel</em>?</h2>
-    <p class="section-sub" data-es="Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia." data-en="Demos available this week. No commitment, no credit card. Just 20 minutes that could change your academy." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia.">Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia.</p>
+    <p class="section-sub" data-es="Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia." data-en="Demos available this week. No commitment, no credit card. Just 20 minutes that could change your academy." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia." data-en="Demos available this week. No commitment, no credit card. Just 20 minutes that could change your academy." data-fr="Démos disponibles cette semaine. Sans engagement, sans carte bancaire. Juste 20 minutes qui peuvent changer votre académie." data-it="Demo disponibili questa settimana. Senza impegno, senza carta di credito. Solo 20 minuti che possono cambiare la tua accademia." data-pt="Demos disponíveis esta semana. Sem compromisso, sem cartão de crédito. Apenas 20 minutos que podem mudar a tua academia.">Demos disponibles esta semana. Sin compromiso, sin tarjeta de crédito. Solo 20 minutos que pueden cambiar tu academia.</p>
     <div class="contact-wrap">
 
       <div class="form-row">
