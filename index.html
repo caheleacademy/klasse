@@ -16,6 +16,11 @@
 <meta name="twitter:description" content="Gestión, comunidad y asistente IA para academias de baile y danza.">
 <link rel="canonical" href="https://klasseapp.com">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  window.addEventListener('load', function() {
+    emailjs.init('iyes9EmQkOL_cOft3');
+  });
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -850,7 +855,7 @@ async function enviarContacto() {
     };
 
     if (EJS_SVC !== 'YOUR_SERVICE_ID' && typeof emailjs !== 'undefined') {
-      await emailjs.send(EJS_SVC, EJS_TPL, params, EJS_KEY);
+      await emailjs.send(EJS_SVC, EJS_TPL, params);
     } else {
       // Sin EmailJS configurado: guarda en consola y muestra éxito igualmente
       await new Promise(r => setTimeout(r, 700));
