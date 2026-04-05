@@ -45,11 +45,9 @@ body {
 
 /* ── LANG TOGGLE ── */
 .lang-toggle {
-  position: fixed; top: 20px; right: 24px; z-index: 1000;
   display: flex; background: rgba(17,17,17,0.9);
   border: 1px solid var(--border); border-radius: 50px;
-  padding: 4px; backdrop-filter: blur(10px);
-  gap: 2px; max-width: calc(100vw - 48px);
+  padding: 4px; gap: 2px;
 }
 .lang-btn {
   padding: 6px 10px; border-radius: 50px; border: none;
@@ -62,8 +60,9 @@ body {
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 20px 48px;
+  padding: 16px 48px;
   display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
   transition: all 0.3s;
 }
 nav.scrolled {
@@ -392,7 +391,7 @@ footer {
 @media(max-width: 768px) {
   nav { padding: 16px 20px; }
   nav.scrolled { padding: 12px 20px; }
-  .lang-toggle { top: 16px; right: 20px; }
+  .lang-toggle { flex-wrap: wrap; }
   .academy-showcase { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; }
   .contact-wrap { padding: 36px 24px; }
   .form-row { grid-template-columns: 1fr; }
@@ -411,18 +410,16 @@ footer {
 </head>
 <body>
 
-<!-- LANG TOGGLE -->
-<div class="lang-toggle">
-  <button class="lang-btn active" onclick="setLang('es')">ES</button>
-  <button class="lang-btn" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" onclick="setLang('fr')">FR</button>
-  <button class="lang-btn" onclick="setLang('it')">IT</button>
-  <button class="lang-btn" onclick="setLang('pt')">PT</button>
-</div>
-
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-logo">Kl<span>asse</span></div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
   <a href="#contacto" class="nav-cta" data-es="Solicitar demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo" data-en="Request demo" data-fr="Demander une démo" data-it="Richiedi una demo" data-pt="Solicitar demo">Solicitar demo</a>
 </nav>
 
@@ -637,35 +634,41 @@ footer {
     <h2 class="section-title" data-es="Precios que <em>recuperas en el primer mes</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>" data-en="Pricing you <em>recover in the first month</em>" data-fr="Des tarifs que vous <em>récupérez dès le premier mois</em>" data-it="Prezzi che <em>recuperi nel primo mese</em>" data-pt="Preços que <em>recuperas no primeiro mês</em>">Precios que <em>recuperas en el primer mes</em></h2>
     <p class="section-sub" data-es="Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio." data-en="With Klasse, just one retained student already covers the monthly fee. The rest is profit.">Con Klasse, un solo alumno más retenido ya paga la mensualidad. El resto es beneficio.</p>
     <div class="pricing-grid">
+
+      <!-- PLAN ÚNICO -->
       <div class="price-card">
-        <div class="price-plan" data-es="INSTALACIÓN ÚNICA" data-fr="INSTALLATION UNIQUE" data-it="INSTALLAZIONE UNICA" data-pt="INSTALAÇÃO ÚNICA" data-en="ONE-TIME SETUP" data-fr="INSTALLATION UNIQUE" data-it="INSTALLAZIONE UNICA" data-pt="INSTALAÇÃO ÚNICA">INSTALACIÓN ÚNICA</div>
+        <div class="price-plan" data-es="SOFTWARE EN PROPIEDAD" data-en="ONE-TIME LICENSE" data-fr="LICENCE UNIQUE" data-it="LICENZA UNICA" data-pt="LICENÇA ÚNICA">SOFTWARE EN PROPIEDAD</div>
         <div class="price-amount">997<span>€</span></div>
-        <div class="price-period" data-es="pago único + 79€/mes" data-fr="paiement unique + 79€/mois" data-it="pagamento unico + 79€/mese" data-pt="pagamento único + 79€/mês" data-en="one-time + 79€/month" data-fr="paiement unique + 79€/mois" data-it="pagamento unico + 79€/mese" data-pt="pagamento único + 79€/mês">pago único + 79€/mes</div>
+        <div class="price-period" data-es="pago único · el software es tuyo para siempre" data-en="one-time · the software is yours forever" data-fr="paiement unique · le logiciel est à vous pour toujours" data-it="pagamento unico · il software è tuo per sempre" data-pt="pagamento único · o software é seu para sempre">pago único · el software es tuyo para siempre</div>
         <ul class="price-features">
-          <li data-es="Setup y personalización completa" data-en="Full setup and customization">Setup y personalización completa</li>
-          <li data-es="Tu logo, colores y dominio" data-en="Your logo, colors and domain">Tu logo, colores y dominio</li>
-          <li data-es="Migración de alumnos existentes" data-en="Existing student migration">Migración de alumnos existentes</li>
-          <li data-es="Formación incluida (2h)" data-en="Training included (2h)">Formación incluida (2h)</li>
-          <li data-es="Soporte prioritario 1 mes" data-en="Priority support 1 month">Soporte prioritario 1 mes</li>
+          <li data-es="Setup y personalización completa" data-en="Full setup and customization" data-fr="Installation et personnalisation complètes" data-it="Setup e personalizzazione completa" data-pt="Setup e personalização completa">Setup y personalización completa</li>
+          <li data-es="Tu logo, colores y dominio" data-en="Your logo, colors and domain" data-fr="Votre logo, couleurs et domaine" data-it="Il tuo logo, colori e dominio" data-pt="O teu logo, cores e domínio">Tu logo, colores y dominio</li>
+          <li data-es="Migración de alumnos existentes" data-en="Existing student migration" data-fr="Migration des élèves existants" data-it="Migrazione degli alunni esistenti" data-pt="Migração de alunos existentes">Migración de alumnos existentes</li>
+          <li data-es="Formación incluida (2h)" data-en="Training included (2h)" data-fr="Formation incluse (2h)" data-it="Formazione inclusa (2h)" data-pt="Formação incluída (2h)">Formación incluida (2h)</li>
+          <li data-es="Soporte prioritario durante 1 mes" data-en="Priority support for 1 month" data-fr="Support prioritaire pendant 1 mois" data-it="Supporto prioritario per 1 mese" data-pt="Suporte prioritário durante 1 mês">Soporte prioritario durante 1 mes</li>
+          <li style="color:var(--muted);font-size:0.85em" data-es="Sin actualizaciones futuras incluidas" data-en="No future updates included" data-fr="Sans mises à jour futures incluses" data-it="Senza aggiornamenti futuri inclusi" data-pt="Sem atualizações futuras incluídas">Sin actualizaciones futuras incluidas</li>
         </ul>
-        <button class="price-cta ghost" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="Solicitar info" data-fr="Demander des infos" data-it="Richiedi informazioni" data-pt="Solicitar informações" data-en="Request info" data-fr="Demander des infos" data-it="Richiedi informazioni" data-pt="Solicitar informações">Solicitar info</button>
+        <button class="price-cta ghost" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="Solicitar info" data-en="Request info" data-fr="Demander des infos" data-it="Richiedi informazioni" data-pt="Solicitar informações">Solicitar info</button>
       </div>
+
+      <!-- PLAN MENSUAL / ANUAL -->
       <div class="price-card featured">
-        <div class="price-badge" data-es="MÁS ELEGIDO" data-fr="PLUS POPULAIRE" data-it="PIÙ SCELTO" data-pt="MAIS ESCOLHIDO" data-en="MOST POPULAR">MÁS ELEGIDO</div>
-        <div class="price-plan" data-es="SUSCRIPCIÓN MENSUAL" data-fr="ABONNEMENT MENSUEL" data-it="ABBONAMENTO MENSILE" data-pt="ASSINATURA MENSAL" data-en="MONTHLY SUBSCRIPTION" data-fr="ABONNEMENT MENSUEL" data-it="ABBONAMENTO MENSILE" data-pt="ASSINATURA MENSAL">SUSCRIPCIÓN MENSUAL</div>
+        <div class="price-badge" data-es="MÁS ELEGIDO" data-en="MOST POPULAR" data-fr="PLUS POPULAIRE" data-it="PIÙ SCELTO" data-pt="MAIS ESCOLHIDO">MÁS ELEGIDO</div>
+        <div class="price-plan" data-es="PLAN CON SOPORTE" data-en="SUPPORT PLAN" data-fr="PLAN AVEC SUPPORT" data-it="PIANO CON SUPPORTO" data-pt="PLANO COM SUPORTE">PLAN CON SOPORTE</div>
         <div class="price-amount">79<span>€</span></div>
-        <div class="price-period" data-es="/mes · sin permanencia · sin letra pequeña" data-fr="/mois · sans engagement · sans surprise" data-it="/mese · senza vincoli · senza sorprese" data-pt="/mês · sem permanência · sem letra pequena" data-en="/month · no commitment · no fine print" data-fr="/mois · sans engagement · sans surprise" data-it="/mese · senza vincoli · senza sorprese" data-pt="/mês · sem permanência · sem letra pequena">/mes · sin permanencia · sin letra pequeña</div>
+        <div class="price-period" data-es="/mes · o 790€/año (2 meses gratis)" data-en="/month · or 790€/year (2 months free)" data-fr="/mois · ou 790€/an (2 mois offerts)" data-it="/mese · o 790€/anno (2 mesi gratis)" data-pt="/mês · ou 790€/ano (2 meses grátis)">/mes · o 790€/año (2 meses gratis)</div>
         <ul class="price-features">
-          <li data-es="Todo incluido sin sorpresas" data-en="Everything included, no surprises">Todo incluido sin sorpresas</li>
-          <li data-es="Actualizaciones automáticas" data-en="Automatic updates">Actualizaciones automáticas</li>
-          <li data-es="Soporte técnico continuo" data-en="Ongoing technical support">Soporte técnico continuo</li>
-          <li data-es="Asistente IA ilimitado" data-en="Unlimited AI assistant">Asistente IA ilimitado</li>
-          <li data-es="Nuevas funciones cada mes" data-en="New features every month">Nuevas funciones cada mes</li>
+          <li data-es="Todo incluido desde el primer día" data-en="Everything included from day one" data-fr="Tout inclus dès le premier jour" data-it="Tutto incluso dal primo giorno" data-pt="Tudo incluído desde o primeiro dia">Todo incluido desde el primer día</li>
+          <li data-es="Acceso a todas las actualizaciones y mejoras" data-en="Access to all updates and improvements" data-fr="Accès à toutes les mises à jour" data-it="Accesso a tutti gli aggiornamenti" data-pt="Acesso a todas as atualizações">Acceso a todas las actualizaciones y mejoras</li>
+          <li data-es="Soporte técnico continuo" data-en="Ongoing technical support" data-fr="Support technique continu" data-it="Supporto tecnico continuo" data-pt="Suporte técnico contínuo">Soporte técnico continuo</li>
+          <li data-es="Asistente IA incluido" data-en="AI assistant included" data-fr="Assistant IA inclus" data-it="Assistente IA incluso" data-pt="Assistente IA incluído">Asistente IA incluido</li>
+          <li data-es="Sin permanencia · cancela cuando quieras" data-en="No commitment · cancel anytime" data-fr="Sans engagement · annulez quand vous voulez" data-it="Senza vincoli · disdici quando vuoi" data-pt="Sem permanência · cancela quando quiseres">Sin permanencia · cancela cuando quieras</li>
         </ul>
-        <button class="price-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="💛 Quiero empezar esta semana" data-fr="💛 Je veux commencer cette semaine" data-it="💛 Voglio iniziare questa settimana" data-pt="💛 Quero começar esta semana" data-en="💛 I want to start this week" data-fr="💛 Je veux commencer cette semaine" data-it="💛 Voglio iniziare questa settimana" data-pt="💛 Quero começar esta semana">💛 Quiero empezar esta semana</button>
+        <button class="price-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-es="💛 Quiero empezar esta semana" data-en="💛 I want to start this week" data-fr="💛 Je veux commencer cette semaine" data-it="💛 Voglio iniziare questa settimana" data-pt="💛 Quero começar esta semana">💛 Quiero empezar esta semana</button>
       </div>
+
     </div>
-    <p style="text-align:center;margin-top:28px;font-size:0.82rem;color:var(--muted)" data-es="⚡ Quedan <strong style="color:var(--accent)">3 plazas disponibles</strong> este mes para nuevas academias. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserva la tuya →</a>" data-en="⚡ Only <strong style='color:var(--accent)'>3 spots available</strong> this month for new academies. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserve yours →</a>">⚡ Quedan <strong style="color:var(--accent)">3 plazas disponibles</strong> este mes para nuevas academias. <a href='#contacto' style='color:var(--accent);text-decoration:none'>Reserva la tuya →</a></p>
+    <p class="urgency-bar" style="text-align:center;margin-top:28px;font-size:0.82rem;color:var(--muted)">⚡ Quedan <strong style="color:var(--accent)" class="urgency-text" data-es="3 plazas disponibles" data-en="3 spots available" data-fr="3 places disponibles" data-it="3 posti disponibili" data-pt="3 vagas disponíveis">3 plazas disponibles</strong> <span data-es="este mes para nuevas academias." data-en="this month for new academies." data-fr="ce mois pour les nouvelles académies." data-it="questo mese per le nuove accademie." data-pt="este mês para novas academias.">este mes para nuevas academias.</span> <a href="#contacto" style="color:var(--accent);text-decoration:none" data-es="Reserva la tuya →" data-en="Reserve yours →" data-fr="Réservez la vôtre →" data-it="Prenota la tua →" data-pt="Reserve a sua →">Reserva la tuya →</a></p>
   </div>
 </section>
 
