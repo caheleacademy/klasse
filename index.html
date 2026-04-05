@@ -15,12 +15,7 @@
 <meta name="twitter:title" content="Klasse — La app que tu academia merece">
 <meta name="twitter:description" content="Gestión, comunidad y asistente IA para academias de baile y danza.">
 <link rel="canonical" href="https://klasseapp.com">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  window.addEventListener('load', function() {
-    emailjs.init('iyes9EmQkOL_cOft3');
-  });
-</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -843,26 +838,22 @@ async function enviarContacto() {
   btn.textContent = sendingMsg[currentLang] || 'Enviando...';
 
   try {
-    // EmailJS — gratis hasta 200 emails/mes
-    // Pasos: emailjs.com → cuenta gratis → crear servicio → crear template → copiar keys
-    const EJS_SVC  = 'klasse_service';
-    const EJS_TPL  = 'template_975d0g6';
-    const EJS_KEY  = 'iyes9EmQkOL_cOft3';
+    // Formspree — gratis hasta 50 envíos/mes, sin configuración de dominio
+    const response = await fetch('https://formspree.io/f/xvzvdzwq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        nombre: nombre,
+        academia: academia,
+        email: email,
+        telefono: tel || 'No indicado',
+        tipo: tipo,
+        alumnos: alumnos,
+        mensaje: mensaje || '—',
+      })
+    });
 
-    const params = {
-      from_name: nombre, academia: academia,
-      email: email, telefono: tel || 'No indicado',
-      tipo: tipo, alumnos: alumnos,
-      mensaje: mensaje || '—',
-    };
-
-    if (EJS_SVC !== 'YOUR_SERVICE_ID' && typeof emailjs !== 'undefined') {
-      await emailjs.send(EJS_SVC, EJS_TPL, params);
-    } else {
-      // Sin EmailJS configurado: guarda en consola y muestra éxito igualmente
-      await new Promise(r => setTimeout(r, 700));
-      console.log('📥 Nueva solicitud Klasse:', params);
-    }
+    if (!response.ok) throw new Error('Formspree error');
 
     msg.className = 'form-msg ok';
     msg.style.display = 'block';
